@@ -1,0 +1,76 @@
+.card-img-top {
+    height: 499px;
+    object-fit: cover;
+}
+.btn-group > .btn + .btn {
+ margin-left: 10px;
+}
+.btn-custom {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #B2D0DF;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-custom:hover {
+    background-color: rgb(180, 180, 187);
+  }
+  .content {
+    background-image: url(../../assets/img/bg-img/ring-bg.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+  }
+  .card {
+    transition: transform 0.3s, z-index 0s;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    z-index: 1;
+  }
+  
+  .content h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  .anim {
+    /* Add animation styles if needed */
+  }
+  
+  .links {
+    margin-top: 20px;
+  }
+  p {
+    font-family: 'Roboto Slab', serif;
+    font-size: medium;
+}
+  .links button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #b1d0f0;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .links button:hover {
+    background-color: #92a3b5;
+  }
+  

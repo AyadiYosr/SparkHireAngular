@@ -1,0 +1,85 @@
+<div>
+    <h2>Résumé</h2>
+    <label for="summary">Résumé :</label>
+    <textarea
+      id="summary"
+      [(ngModel)]="summary"
+      class="form-control"
+      name="summary"
+      rows="4"
+      required
+    ></textarea>
+  
+    <h3>Education :</h3>
+    <div *ngFor="let edu of educationList; let i = index">
+      <label for="eduTitle{{i}}">Titre :</label>
+      <input
+        type="text"
+        [(ngModel)]="edu.title"
+        class="form-control"
+        id="eduTitle{{i}}"
+        name="eduTitle{{i}}"
+        required
+      />
+  
+      <label for="eduAddress{{i}}">Adresse :</label>
+      <input
+        type="text"
+        [(ngModel)]="edu.address"
+        class="form-control"
+        id="eduAddress{{i}}"
+        name="eduAddress{{i}}"
+        required
+      />
+  
+      <label for="eduDescription{{i}}">Description :</label>
+      <textarea
+        id="eduDescription{{i}}"
+        [(ngModel)]="edu.description"
+        class="form-control"
+        name="eduDescription{{i}}"
+        rows="4"
+        required
+      ></textarea>
+      
+      <button (click)="removeEducation(i)">Supprimer</button>
+    </div>
+    <button (click)="addEducation()">Ajouter une éducation</button>
+  
+    <h3>Expérience professionnelle :</h3>
+    <div *ngFor="let exp of experienceList; let i = index">
+      <label for="expTitle{{i}}">Titre :</label>
+      <input
+        type="text"
+        [(ngModel)]="exp.title"
+        class="form-control"
+        id="expTitle{{i}}"
+        name="expTitle{{i}}"
+        required
+      />
+  
+      <label for="expAddress{{i}}">Adresse :</label>
+      <input
+        type="text"
+        [(ngModel)]="exp.address"
+        class="form-control"
+        id="expAddress{{i}}"
+        name="expAddress{{i}}"
+        required
+      />
+  
+      <label for="expDescription{{i}}">Description :</label>
+      <textarea
+        id="expDescription{{i}}"
+        [(ngModel)]="exp.description"
+        class="form-control"
+        name="expDescription{{i}}"
+        rows="4"
+        required
+      ></textarea>
+      
+      <button (click)="removeExperience(i)">Supprimer</button>
+    </div>
+    <button (click)="addExperience()">Ajouter une expérience professionnelle</button>
+  </div>
+  

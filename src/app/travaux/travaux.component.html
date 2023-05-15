@@ -1,0 +1,60 @@
+<h3>Exemples de travaux :</h3>
+
+<div *ngFor="let project of projects; let i = index">
+  <label for="project{{ i }}-title">Titre du projet :</label>
+  <input
+    type="text"
+    [(ngModel)]="project.title"
+    id="project{{ i }}-title"
+    class="form-control"
+    name="project{{ i }}-title"
+    required
+  />
+
+  <label for="project{{ i }}-description">Description :</label>
+  <textarea
+    id="project{{ i }}-description"
+    [(ngModel)]="project.description"
+    class="form-control"
+    name="project{{ i }}-description"
+    rows="4"
+    required
+  ></textarea>
+
+  <label for="project{{ i }}-type">Type de travail :</label>
+  <input
+    type="text"
+    id="project{{ i }}-type"
+    [(ngModel)]="project.type"
+    class="form-control"
+    name="project{{ i }}-type"
+    required
+  />
+
+  <label for="project{{ i }}-link">Lien vers le projet :</label>
+  <input
+    type="url"
+    id="project{{ i }}-link"
+    [(ngModel)]="project.link"
+    class="form-control"
+    name="project{{ i }}-link"
+    required
+  />
+
+  <label for="project{{ i }}-file">Fichier :</label>
+  <input
+    type="file"
+    id="project{{ i }}-file"
+    (change)="onFileSelected($event, i)"
+    class="form-control"
+    name="project{{ i }}-file"
+    accept="image/*"
+    required
+  />
+
+  <img [src]="project.fileData" *ngIf="project.fileData" />
+</div>
+
+<button type="button" (click)="addProject()">
+  Ajouter un nouveau travail
+</button>

@@ -1,0 +1,21 @@
+<h3>Compétences :</h3>
+
+<label for="technicalSkills">Compétences techniques :</label>
+<div class="skills-container">
+  <div class="skill-item" *ngFor="let skill of technicalSkills">
+    <input type="text" [(ngModel)]="skill.name" placeholder="Technologie" required>
+    <input type="number" [(ngModel)]="skill.percentage" placeholder="% de maîtrise" required min="0" max="100">
+    <button type="button" (click)="removeSkill(technicalSkills, skill)">Supprimer</button>
+  </div>
+  <button type="button" (click)="addSkill(technicalSkills)">Ajouter une compétence technique</button>
+</div>
+
+<label for="softSkills">Compétences personnelles :</label>
+<div class="skills-container">
+  <div class="skill-item" *ngFor="let skill of softSkills">
+    <input type="text" [(ngModel)]="skill.name" placeholder="Compétence personnelle" required>
+    <input type="number" [(ngModel)]="skill.percentage" placeholder="% de maîtrise" required min="0" max="100">
+    <button type="button" (click)="removeSkill(softSkills, skill)">Supprimer</button>
+  </div>
+  <button type="button" (click)="addSkill(softSkills)">Ajouter une compétence personnelle</button>
+</div>

@@ -1,0 +1,68 @@
+textarea {
+    background-color:  var(--yt-primary-background);
+    border: 1px solid var(--yt-secondary-text);
+    color: var(--yt-primary-text);
+    padding: 10px;
+    border-radius: 4px;
+  }
+  textarea:focus {
+    background-color: var(--yt-primary-background);
+    border: 1px solid var(--yt-secondary-text);
+    color: white;
+    outline: none;
+    border: 1px solid var(--yt-accent-color);
+    caret-color: var(--yt-accent-color);
+  }
+
+  button{
+    margin-top: 20px;
+  }
+  
+h1, h2, h3, h4, h5, h6 {
+  color: var(--yt-secondary-text);
+}
+
+a, button {
+background-color: var(--yt-secondary-background);
+color: var(--yt-primary-text);
+border: none;
+padding: 12px 20px;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+button:hover{
+  background-color: var(--yt-primary-background);
+
+}
+input[type="text"],
+input[type="file"],
+input[type="file"]:valid,
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+textarea {
+  background-color: var(--yt-primary-background);
+  border: 1px solid var(--yt-secondary-text);
+  color: var(--yt-primary-text);
+  padding: 10px;
+  border-radius: 4px;
+}
+
+input[type="text"]:focus,
+input[type="file"],
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+textarea:focus {
+  background-color: var(--yt-primary-background);
+  border: 1px solid var(--yt-secondary-text);
+  color: white;
+  outline: none;
+  border: 1px solid var(--yt-accent-color);
+  caret-color: var(--yt-accent-color);
+}

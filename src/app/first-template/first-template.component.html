@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Resume Design</title>	
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</head>
+<body >
+	<div class="wrapper"  style=" background-color: #B2D0DF;">
+		<div #template class="resume_design ">
+			<div class="resume_left">
+				<div class="about_sec">
+					<div class="button">About Me</div>
+					<p>{{CvData.Bio}}</p>
+				</div>
+				<div class="exp_sec">
+					<div class="button">Experience</div>
+					<ul *ngFor="let experience of CvData.Experience">
+						<li>
+							<div class="item">
+								<div class="item_grp">
+									<p class="title">{{experience.Title}}</p>
+									<p class="sub_title">{{experience.Company}}</p>
+									<span class="timeline">{{experience.StartDate}} - {{experience.EndDate}}</span>
+								</div>
+								<p class="content">{{experience.Description}}</p>
+							</div>
+						</li>
+						
+					</ul>
+				</div>
+				<div class="edu_sec">
+					<div class="button">Education</div>
+					<ul *ngFor="let education of CvData.educations">
+						<li>
+							<div class="item">
+								<div class="item_grp">
+									<p class="title">{{education.degree}}</p>
+									<p class="sub_title">{{education.fieldOfStudy}}</p>
+                                    <span class="timeline">{{education.fromYear}} - {{education.toYear}} </span>
+								</div>
+								<p class="content">{{education.school}}</p>
+							</div>
+						</li>
+						
+					</ul>
+				</div>
+                
+			</div>
+			<div class="resume_right">
+				<div class="profile_sec">
+					<div class="img_holder">
+						<img [src]="CvData.image">
+					</div>
+					<div class="profile_info">
+						<p class="first_name">{{CvData.name}}</p>
+					
+						<p class="role">{{CvData.job}}</p>
+					</div>
+				</div>
+				<div class="contact_sec">
+					<div class="button">Contact US</div>
+					<ul>
+						<li class="item">
+							<div class="icon">
+								<i class="fas fa-phone"></i>
+							</div>
+							<div class="content">
+								<p class="title">Phone :</p>
+								<p class="subtitle">{{CvData.phonenumber}}</p>
+							</div>
+						</li>
+						<li class="item">
+							<div class="icon">
+								<i class="fas fa-envelope"></i>
+							</div>
+							<div class="content">
+								<p class="title">Email : </p>
+								<p class="subtitle">{{CvData.email}}</p>
+							</div>
+						</li>
+						<li class="item">
+							<div class="icon">
+								<i class="fas fa-map-signs"></i>
+							</div>
+							<div class="content">
+								<p class="title">Address :</p>
+								<p class="subtitle">{{CvData.adress}}</p>
+							</div>
+						</li>
+                        <li class="item">
+							<div class="icon">
+								<i class="fas fa-map-signs"></i>
+							</div>
+						
+						</li>
+                        <div *ngIf="CvData.websitelink !== ''">
+                            <li class="item">
+                              <div class="icon">
+                                <i class="fas fa-map-signs"></i>
+                              </div>
+                              <div class="content">
+                                <p class="title">Website Link :</p>
+                                <p class="subtitle">{{CvData.websitelink}}</p>
+                              </div>
+                            </li>
+                          </div>
+                          <li *ngIf="CvData.Nationality !== ''" class="item">
+                            <div class="icon">
+                              <i class="fas fa-map-signs"></i>
+                            </div>
+                            <div class="content">
+                              <p class="title">Nationality</p>
+                              <p class="subtitle">{{CvData.Nationality}}</p>
+                            </div>
+                          </li>  
+                          <li *ngIf="CvData.Gender !== ''" class="item">
+                            <div class="icon">
+                              <i class="fas fa-map-signs"></i>
+                            </div>
+                            <div class="content">
+                              <p class="title">Gender</p>
+                              <p class="subtitle">{{CvData.Gender}}</p>
+                            </div>
+                          </li>  
+					</ul>
+				</div>
+				<div class="skills_sec">
+					<div class="button">Skills</div>
+                    <div  *ngFor="let skill of CvData.skills">
+                        <div class="row align-items-center mb-2">
+                          <div class="col-3">{{ skill.name }}</div>
+                          <div class="col-9">
+                            <div class="progress progress-bar progress-bar-striped" role="progressbar" [style.width.%]="skill.percentage" 
+                              [attr.aria-valuenow]="skill.percentage" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+				</div>
+                <div class="skills_sec">
+                    <div class="button">Social Links</div>
+                    <div *ngFor="let links of CvData.SocialLinks">
+                      <div class="row align-items-center mb-2">
+                        <img [src]="links.icon" class="social-icon">
+                        <span class="social-name">{{links.name}}</span>
+                      </div>
+                    </div>
+                  </div>
+			</div>
+		</div>
+     
+	</div>
+	
+	
+	<div class="vertical-menu">
+		<a (click)="downloadPDF()">
+			<img src="../../assets/img/pdf (1).png" alt="PDF" />
+		  </a>
+		  
+		  <a (click)="print()">
+			<img src="../../assets/img/printer.png" alt="PDF" class="image-with-shadow" />
+		  </a>
+		  <a (click)="downloadWord()">
+			<img src="../../assets/img/doc.png" alt="PDF" />
+		  </a>
+		  <a (click)="downloadPNG()">
+			<img src="../../assets/img/png.png" alt="PDF" />
+		  </a>
+	
+		
+	  </div>
+	  
+	  
+	  
+    <!-- <div class="cv-download">
+        <div class="row align-items-center">
+            
+            <div class="col-lg-6 col-md-12">
+                <p class="topnote">Fill all required fields and click create cv to download CV in both PDF and PNG formats</p>
+                
+            </div>
+            <div class="col-lg-6 col-md-12 mt-s">
+                <a href="#" class="btn btn-primary">Download as PDF</a>
+                <a href="#" class="btn btn-soft-primary ms-2">Download as PNG</a>
+            </div>
+        </div>
+    </div> -->
+</body>
+</html>

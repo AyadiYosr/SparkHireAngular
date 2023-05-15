@@ -1,0 +1,9 @@
+<div>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+    <button (click)="removeBackground()">Remove Background</button>
+  </div>
+  <div>
+    <img [src]="imageUrl" *ngIf="imageUrl" />
+    <img [src]="resultUrl" *ngIf="resultUrl" />
+  </div>
+  

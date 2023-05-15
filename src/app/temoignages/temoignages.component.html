@@ -1,0 +1,63 @@
+<h3>Témoignages :</h3>
+
+<div
+  class="testimonial"
+  *ngFor="let testimonial of testimonials; let i = index"
+>
+  <label for="testimonial{{ i }}-name"
+    >Nom du client/collègue/superviseur :</label
+  >
+  <input
+    type="text"
+    id="testimonial{{ i }}-name"
+    [(ngModel)]="testimonial.name"
+    class="form-control"
+    name="testimonial{{ i }}-name"
+    required
+  />
+
+  <label for="testimonial{{ i }}-position">Poste :</label>
+  <input
+    type="text"
+    id="testimonial{{ i }}-position"
+    [(ngModel)]="testimonial.position"
+    class="form-control"
+    name="testimonial{{ i }}-position"
+    required
+  />
+
+  <label for="testimonial{{ i }}-company">Entreprise :</label>
+  <input
+    type="text"
+    id="testimonial{{ i }}-company"
+    [(ngModel)]="testimonial.company"
+    class="form-control"
+    name="testimonial{{ i }}-company"
+    required
+  />
+
+  <label for="testimonial{{ i }}-text">Témoignage :</label>
+  <textarea
+    id="testimonial{{ i }}-text"
+    [(ngModel)]="testimonial.text"
+    class="form-control"
+    name="testimonial{{ i }}-text"
+    rows="4"
+    required
+  ></textarea>
+
+  <input
+  type="file"
+  id="project{{ i }}-file"
+  (change)="onFileSelected($event, i)"
+  class="form-control"
+  name="project{{ i }}-file"
+  accept="image/*"
+  required
+/>
+
+</div>
+
+<button type="button" (click)="addTestimonial()">
+  Ajouter un autre témoignage
+</button>

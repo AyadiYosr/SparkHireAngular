@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+</head>
+
+<body class="ali-bg">
+    <!-- ##### Blog Area Start ##### -->
+    <section class="blog-area main-container " style=" background-color: #B2D0DF">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="container">
+                    <form method="post" action="#">
+                        <div class="mt-150">
+                            <div class="form-group add-skill mt-s block-container">
+                                <h2 data-bs-toggle="collapse" data-bs-target="#personcollapse">Personnalise your CV
+                                </h2>
+                                <div class="collapse" id="personcollapse">
+                                    <div class="block-container">
+                                        <div class="all-perso">
+                                            <div class="new-perso">
+                                              <div class="row">
+                                                <div class="col-6">
+                                                  <label for="favcolor">Choose your favourite color</label>
+                                                </div>
+                                                <div class="col-6">
+                                                  <input class="form-control form-control-color" [(ngModel)]="CvData.selectedColor" type="color" id="favcolor"
+                                                    name="favcolor" value="selectedColor">
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col">
+                                                  <label for="fontSelect">Select your font</label>
+                                                </div>
+                                                <div class="col">
+                                                  <select [(ngModel)]="selectedFont" id="fontSelect" (change)="changeFont()">
+                                                    <option *ngFor="let font of fonts" [value]="font">{{ font }}</option>
+                                                  </select>
+                                                </div>
+                                              </div>
+                                              <hr>
+                                            </div>
+                                          </div>
+                                          
+                                        <br>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="block-container">
+                                <h2 data-bs-toggle="collapse" data-bs-target="#personalInfoCollapse">Personal Info 🪪
+                                </h2>
+                                <div class="collapse" id="personalInfoCollapse">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-2 col-md-4">
+                                            <img [src]="CvData.image" class="d-block rounded img-thumbnail" alt=""
+                                                style="max-width: 150px; max-height: 150px;">
+                                        </div>
+
+                                        <div class="col-lg-5 col-md-8 mt-3 mt-md-0 ">
+                                            <h6 style="margin-left: 30px;">Upload your picture</h6>
+                                            <p class="text-muted mb-0" style="margin-left: 30px;">For best results, use
+                                                image 300px by 300px in either .jpg or .png</p>
+                                        </div>
+
+                                        <div class="col-lg-5 col-md-12 mt-s">
+                                            <button style="margin-right:10px;" class="btn btn-primary"
+                                                (click)="fileInput.click()">Upload</button>
+                                            <input #fileInput type="file" (change)="onImageChange($event)"
+                                                accept="image/*" class="form-control-file" style="display:none">
+                                            <button class="personalised-button" (click)="removeImage()">Remove</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-30">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <label>Full Name:</label>
+                                                <input #nameInput="ngModel" [(ngModel)]="CvData.name==='' ? defaultname: CvData.name " type="text"
+                                                    name="full-name" class="form-control" placeholder="enter your name"
+                                                    required [class.is-invalid]="nameInput.invalid && nameInput.touched"
+                                                    [ngClass]="{'border-danger': nameInput.invalid && nameInput.touched}">
+                                                <div class="invalid-feedback">
+                                                    Please enter your full name.
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-lg-6">
+                                                <label>Jop Title: * </label>
+                                                <input [(ngModel)]="CvData.job" type="text" name="jop-title"
+                                                    class="form-control" placeholder="Ex: Web Developer">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Your Address: * </label>
+                                                <input [(ngModel)]="CvData.adress" type="text" name="address"
+                                                    class="form-control" placeholder="enter your address">
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Your Email: *</label>
+                                                <input #Emailinput="ngModel" [(ngModel)]="CvData.email" type="text"
+                                                    name="Emailinput" class="form-control"
+                                                    placeholder="enter your Email" required
+                                                    [class.is-invalid]="Emailinput.invalid && Emailinput.touched"
+                                                    [ngClass]="{'border-danger': Emailinput.invalid && Emailinput.touched}">
+                                                <div class="invalid-feedback">
+                                                    Please enter your Email.
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label>Website Link: (Optional)</label>
+                                                <input [(ngModel)]="CvData.websitelink" type="text" name="web"
+                                                    class="form-control" placeholder="enter your website link">
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <label>Phone No: * </label>
+                                                <input [(ngModel)]="CvData.phonenumber"type="text" name="phone" class="form-control"
+                                                    placeholder="Ex: Web Developer">
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <label>Your Bio Here </label>
+                                                <textarea [(ngModel)]="CvData.Bio" name="comments" id="comments"
+                                                    rows="4" class="form-control" placeholder="About Me :"></textarea>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="mt-30">
+                                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample"
+                                                role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                Add more information 🧷
+                                            </a>
+                                            <div class="collapse mt-3" id="collapseExample">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <label>Nationality:</label>
+                                                        <input [(ngModel)]="CvData.Nationality" type="text"
+                                                            name="nationality" class="form-control"
+                                                            placeholder="Enter your nationality">
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <label>Gender:</label>
+                                                        <input [(ngModel)]="CvData.Gender" type="text" name="gender"
+                                                            class="form-control" placeholder="Enter your gender">
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <label>Other field:</label>
+                                                        <input type="text" name="other-field" class="form-control"
+                                                            placeholder="Enter other information">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group add-edu mt-s block-container">
+                            <h2 data-bs-toggle="collapse" data-bs-target="#experienceCollapse">Add Experiences 💻</h2>
+                            <div class="collapse" id="experienceCollapse">
+                                <div class="all-exps">
+                                    <div class="new-exp" *ngFor="let experience of CvData.Experience">
+                                        <label>Title:</label>
+                                        <input [(ngModel)]="experience.Title" type="text" name="exp[]"
+                                            class="form-control" placeholder="Ex: Web Developer">
+                                        <label>Company:</label>
+                                        <input [(ngModel)]="experience.Company" type="text" name="exp[]"
+                                            class="form-control" placeholder="Ex: Google">
+                                        <label>Start date:</label>
+                                        <input [(ngModel)]="experience.StartDate" type="date" name="exp[]"
+                                            class="form-control">
+                                        <label>End date:</label>
+                                        <input [(ngModel)]="experience.EndDate" type="date" name="exp[]"
+                                            class="form-control">
+                                        <label>Description:</label>
+                                        <textarea [(ngModel)]="experience.Description" name="exp[]" class="form-control"
+                                            rows="3" placeholder="Enter job description"></textarea>
+                                        <button class="btn btn-primary mt-2 remove-exp"
+                                            (click)="removeExperience(experience)">Remove</button>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary mt-2 add-more-exp" (click)="addExperience()">Add
+                                    More</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group add-edu block-container">
+                            <h2 data-bs-toggle="collapse" data-bs-target="#educationCollapse">Add Education 📘 </h2>
+                            <div id="educationCollapse" class="collapse">
+                                <div class="all-edus">
+                                    <div class="new-edu" *ngFor="let education of CvData.educations">
+                                        <div>
+                                            <button class="fa fa-trash float-right"
+                                                (click)="removeEducation(education)"></button>
+                                        </div>
+                                        <label>Field of study:</label>
+                                        <input type="text" name="fieldOfStudy" class="form-control"
+                                            [(ngModel)]="education.fieldOfStudy" placeholder="Ex: Computer Science">
+                                        <label>Degree:</label>
+                                        <input type="text" name="degree" class="form-control"
+                                            [(ngModel)]="education.degree" placeholder="Ex: Bachelor's">
+                                        <label>School:</label>
+                                        <input type="text" name="school" class="form-control"
+                                            [(ngModel)]="education.school" placeholder="Ex: al-albayt university">
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <label>From year:</label>
+                                                <input type="month" name="fromYear" class="form-control"
+                                                    [(ngModel)]="education.fromYear">
+                                            </div>
+                                            <div class="col">
+                                                <label>To year (optional=present):</label>
+                                                <input type="month" name="toYear" class="form-control"
+                                                    [(ngModel)]="education.toYear">
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-secondary" (click)="addEducation()">Add
+                                            Education</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="clearfix"></div>
+
+                        <div class="form-group add-skill mt-s block-container">
+                            <h2 data-bs-toggle="collapse" data-bs-target="#skillsCollapse">Add Skills 🖥 </h2>
+                            <div class="collapse" id="skillsCollapse">
+                                <div class="block-container">
+                                    <div class="all-skills">
+                                        <div class="new-skills" *ngFor="let skill of CvData.skills">
+                                            <label>Skill</label>
+                                            <input type="text" name="skills[]" class="form-control"
+                                                [(ngModel)]="skill.name">
+                                            <label>Proficiency</label>
+                                            <input type="text" name="profecieny[]" class="form-control"
+                                                [(ngModel)]="skill.percentage">
+                                            <hr>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div>
+                                        <button class="add-blk add-skills btn btn-info mt-50" (click)="addskill()">Add
+                                            Another Skill</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="clearfix"></div>
+
+                        <div class="form-group add-social mt-s block-container">
+                            <h2 data-bs-toggle="collapse" data-bs-target="#socialCollapse">Add Social Links 🔗</h2>
+                            <div class="collapse" id="socialCollapse">
+                                <div class="block-container">
+                                    <div class="all-socials">
+                                        <div class="new-social" *ngFor="let links of CvData.SocialLinks">
+                                            <label>Social Name</label>
+                                            <input [(ngModel)]="links.name" type="text" name="socials[]"
+                                                class="form-control">
+                                            <label>Social Link</label>
+                                            <input [(ngModel)]="links.link" type="text" name="links[]"
+                                                class="form-control">
+                                            <label>Social icon image (16px*16px)</label>
+                                            <br>
+                                            <button style="margin-right:10px;" class="btn btn-primary"
+                                                (click)="fileInput.click()">Upload Social Image</button>
+                                            <input #fileInput type="file" (change)="onImageChangeskill($event)"
+                                                accept="image/*" class="form-control-file" style="display:none">
+
+                                        </div>
+                                        <hr>
+                                    </div>
+                                    <br>
+                                    <div>
+                                        <i class="fa fa-plus"></i>
+                                        <button class="add-blk add-socials btn btn-info mt-50" (click)="addLinks()">Add
+                                            Another Social</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr class="mt-100">
+                        <div class="form-group add-hobby mt-s block-container">
+                            <h2 data-bs-toggle="collapse" data-bs-target="#hobbyCollapse">Add Hobbies 💎 </h2>
+                            <div id="hobbyCollapse" class="collapse">
+                                <div class="block-container">
+                                    <div class="all-hobbies">
+                                        <div class="new-hobbies">
+                                            <label>Hobby Name</label>
+                                            <input type="text" name="hobbies[]" class="form-control">
+                                            <label>Hobby icon image (32px*32px)</label>
+                                            <input type="file" name="hobbies[]" class="form-control" />
+
+                                            <hr>
+                                        </div>
+                                    </div>
+                                    <div class="add-blk add-hobbies btn btn-info mt-50">
+                                        <i class="fa fa-plus"></i>
+                                        <span>Add another Hobby</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- ##### Blog Area End ##### -->
+
+
+
+
+</body>
+
+</html>

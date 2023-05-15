@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In Page</title>
+
+  
+   
+</head>
+<body>
+
+    <main>
+        <section class="learn">
+           <h1>Create Your Cv/Portfolio<br>SPARK HIRE</h1>
+           <p>Create your own resume in real-time. <br> Watching scripted tutorials is great, but understanding how <br> developers think is invaluable.</p>  
+        </section>
+
+        <section>
+         
+            
+    <div class="sign-up">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <!-- <div *ngIf="errorLogin" class="alert alert-danger">Login et/ou Mot de passe invalides</div> -->
+            <label>Login</label>
+            <input #loginInput="ngModel" ngModel type="text" required email class="form-control" name="email">
+            <div *ngIf="loginInput.invalid && loginInput.dirty" class="alert alert-danger">Veuillez saisir une adresse mail
+                valide
+            </div>
+            <label for="pwd">Mot de passe</label>
+            <input ngModel name="password" type="text" class="form-control" id="pwd">
+         
+        
+        <input id="submit-btn" type="submit" value="Login" id="btn">
+           
+        </form>
+
+       </div>
+       </section>
+    </main>
+   
+    
+</body>
+</html>

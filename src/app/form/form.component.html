@@ -1,0 +1,126 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <form #f="ngForm" (ngSubmit)="onsubmit(f.value)" action="/portfolio">
+          <div class="form-group">
+            <app-introduction #introductionForm  *ngIf="montrerIntroduction"></app-introduction>
+            <app-travaux #travauxForm  *ngIf="montrerTravaux"></app-travaux>
+            <app-temoignages #temoignagesForm  *ngIf="montrerTemoignages"></app-temoignages>
+            <app-competences #cordeonneesForm  *ngIf="montrerCompetences"></app-competences>
+            <app-coordonnees #competencesForm  *ngIf="montrerCoordonnees"></app-coordonnees>
+            <app-resume #resumesForm   *ngIf="montrerResume"></app-resume>
+
+        
+          
+        
+            <!--   <h2>Formulaire de Portfolio</h2>
+   <label for="name">Nom :</label>
+    <input type="text"ngModel class="form-control" id="name" name="name" required>
+    
+    <label for="Parcours">Parcours :</label>
+    <input type="text" ngModel class="form-control" id="Parcours" name="Parcours" required>
+    
+    <label for="education">education :</label>
+    <textarea id="education" ngModel class="form-control" name="education" rows="4" required></textarea>
+    
+    <label for="experience">Expérience :</label>
+    <textarea id="experience" ngModel class="form-control" name="experience" rows="4" required></textarea>
+    
+    <label for="resume">Télécharger CV :</label>
+    <input type="file" id="resume" ngModel class="form-control" name="resume" accept=".pdf,.doc,.docx" required>
+    
+    <h3>Exemples de travaux :</h3>
+  
+  <div *ngFor="let project of projects; let i = index">
+    <label for="project{{i}}-title">Titre du projet :</label>
+    <input type="text" ngModel id="project{{i}}-title" class="form-control" name="project{{i}}-title" required>
+  
+    <label for="project{{i}}-description">Description :</label>
+    <textarea id="project{{i}}-description" ngModel class="form-control" name="project{{i}}-description" rows="4" required></textarea>
+  
+    <label for="project{{i}}-type">Type de travail :</label>
+    <input type="text" id="project{{i}}-type" ngModel class="form-control" name="project{{i}}-type" required>
+  
+    <label for="project{{i}}-link">Lien vers le projet :</label>
+    <input type="url" id="project{{i}}-link" ngModel class="form-control" name="project{{i}}-link" required>
+  </div>
+  
+  <button type="button" class="btn btn-primary" (click)="addProject()">Ajouter un nouveau travail</button>
+  
+    
+  <h3>Témoignages :</h3>
+  
+  <div class="testimonial" *ngFor="let testimonial of testimonials; let i = index">
+    <label for="testimonial{{i+1}}-name">Nom du client/ collègue/ superviseur :</label>
+    <input type="text" id="testimonial{{i+1}}-name" [(ngModel)]="testimonial.name" class="form-control" name="testimonial{{i+1}}-name" required>
+  
+    <label for="testimonial{{i+1}}-position">Poste :</label>
+    <input type="text" id="testimonial{{i+1}}-position" [(ngModel)]="testimonial.position" class="form-control" name="testimonial{{i+1}}-position" required>
+  
+    <label for="testimonial{{i+1}}-company">Entreprise :</label>
+    <input type="text" id="testimonial{{i+1}}-company" [(ngModel)]="testimonial.company" class="form-control" name="testimonial{{i+1}}-company" required>
+  
+    <label for="testimonial{{i+1}}-text">Témoignage :</label>
+    <textarea id="testimonial{{i+1}}-text" [(ngModel)]="testimonial.text" class="form-control" name="testimonial{{i+1}}-text" rows="4" required></textarea>
+  
+    <button *ngIf="i === testimonials.length - 1" type="button" class="btn btn-secondary" (click)="addTestimonial()">Ajouter un autre témoignage</button>
+  </div>
+  
+    
+    <h3>Compétences :</h3>
+    
+    <label for="technical-skills">Compétences techniques :</label>
+    <textarea id="technical-skills" ngModel class="form-control" name="technical-skills" rows="4" required></textarea>
+    
+    <label for="soft-skills">Compétences personnelles :</label>
+    <textarea id="soft-skills" ngModel class="form-control" name="soft-skills" rows="4" required></textarea>
+    
+    <h3>Coordonnées :</h3>
+    
+    <label for="email">Email :</label>
+    <input type="email" class="form-control" ngModel id="email" name="email" required>
+    
+    <label for="phone">Téléphone :</label>
+    <input type="tel" class="form-control" ngModel id="phone" name="phone" required>
+    
+    <label for="address">Adresse :</label>
+    <textarea id="address" class="form-control" ngModel name="address" rows="4" required></textarea>
+    <label for="address">Adresse :</label>
+    <textarea id="address" class="form-control" ngModel name="address" rows="4" required></textarea>
+    
+    <h3>Branding personnel :</h3>
+    
+    <label for="logo">Logo :</label>
+    <input type="file" class="form-control" ngModel id="logo" name="logo" accept=".png,.jpg,.jpeg" required>
+    
+    <label for="color-scheme">Couleurs :</label>
+    <input type="text" class="form-control" ngModel id="color-scheme" name="color-scheme" required> -->
+  
+            <!-- <button *ngIf="montrerGenerer" (click)="generatePdf()" type="submit" class="btn btn-primary">Generate PDF</button>
+    <button *ngIf="!montrerGenerer" (click)="showTravaux()" type="button" class="btn btn-primary">Travaux suivants</button> -->
+         <br>   <button
+              *ngIf="montrerSuivantButton"
+              (click)="showNext()"
+              type="button"
+            
+            >
+              Suivant
+            </button>
+            <button
+              *ngIf="montrerGenerer"
+              (click)="generatePdf()"
+              type="submit"
+             
+            >
+              Generer PDF
+            </button>
+          </div>
+        </form>
+      </div>
+  
+      <div  id="back" class="col">
+    
+    </div>
+
+  </div>

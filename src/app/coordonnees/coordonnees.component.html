@@ -1,0 +1,53 @@
+<h3>Coordonnées :</h3>
+
+<label for="email">Email :</label>
+<input
+  type="email"
+  class="form-control"
+  [(ngModel)]="email"
+  id="email"
+  name="email"
+  required
+/>
+
+<label for="phone">Téléphone :</label>
+<input
+  type="tel"
+  class="form-control"
+  [(ngModel)]="phone"
+  id="phone"
+  name="phone"
+  required
+/>
+
+<label for="address">Adresse :</label>
+<textarea
+  id="address"
+  class="form-control"
+  [(ngModel)]="address"
+  name="address"
+  rows="4"
+  required
+></textarea>
+<h3>Branding personnel :</h3>
+
+<label for="logo">Logo :</label>
+<input
+  type="file"
+  class="form-control"
+  [(ngModel)]="logo"
+  id="logo"
+  name="logo"
+  accept=".png,.jpg,.jpeg"
+  required
+/>
+
+<label for="color-scheme">Couleurs :</label>
+<input
+  type="text"
+  class="form-control"
+  [(ngModel)]="color"
+  id="color-scheme"
+  name="color-scheme"
+  required
+/>

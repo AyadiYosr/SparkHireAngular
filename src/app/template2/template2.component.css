@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+body{
+	height: 95vh;
+	font-weight: bold;
+    width: 80%;
+	letter-spacing: 2px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), 0 0 40px rgba(0, 0, 0, 0.1), 0 0 60px rgba(0, 0, 0, 0.2), 0 0 80px rgba(0, 0, 0, 0.1), 0 0 100px rgba(0, 0, 0, 0.2), 0 0 120px rgba(0, 0, 0, 0.1);
+}
+*{
+	margin: 0px; padding: 0px; font-family: 'Montserrat', sans-serif;
+}
+.main{
+	background-color: #ff9b00;
+	height: auto;
+    width: 650px;
+}
+
+.left{
+	background-color: #c1944c;
+	width: 200px;
+	height: 110%;
+	float: left;
+}
+.right{
+	width: 400px;
+    height: 100%;
+	float: left;
+}
+.profile-img {
+	width: 200px;
+	height: 200px;
+	background-color: #ddd;
+	border-radius: 50%;
+	margin-bottom: 20px;
+	margin-left: 60px;
+	border: 10px solid #6b6bd0;
+	box-shadow: 6px 7px 9px 5px #5f85ec73;
+	overflow: hidden;
+  }
+  
+  .profile-img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+  }
+  
+.box-1{
+	position: relative;
+}
+.heading{
+	background-color: #a6a4a4;
+	width: 200px;
+	color: #3e65b9;
+	text-align: left;
+	padding-left: 20px;
+	margin-right: -15px;
+}
+.heading::after{
+	content: '';
+	position: absolute;
+	width: 15px;
+	height: 18px;
+	background-color: #5a5959;
+	left: 191px;
+	top: 26px;
+	transform:rotate(56deg);
+	z-index: -1;
+}
+.p1{
+	padding: 9px 10px;
+	font-size: 11px;
+}
+.icons1{
+	font-size: 16px!important;
+	padding-right: 10px!important;
+	vertical-align: sub;
+}
+.skill-container{
+	width: 90%;
+	background-color: #4d4d4d;
+	margin: 0px 10px;
+}
+.skill{
+	text-align: right;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	color: white;
+}
+.html{
+	width: 90%;
+	background-color: white;
+}
+.css{
+	width: 80%;
+	background-color: white;
+}
+.js{
+	width: 85%;
+	background-color: white;
+}
+.jquery{
+	width: 80%;
+	background-color: white;
+}
+.web {
+	width: 85%;
+	background-color: white;
+}
+.gra{
+	width: 70%;
+	background-color: white;
+}
+.icons2{
+	padding: 18px 10px;
+}
+.name-div{
+	padding: 86px 0px 60px 55px;
+	text-align: center;
+	letter-spacing: 3px;
+}
+.name-div h1{
+	margin-bottom: 10px;
+}
+.box-2{
+	padding: 0px 50px;
+	margin-top: 30px;
+}
+.p2{
+	font-size: 10px;
+	font-weight: 300;
+	letter-spacing: 1px;
+	word-spacing: 2px;
+	line-height: 18px;
+	margin-top: 5px;
+}
+h2{
+	font-size: 16px;
+	margin-bottom: 15px;
+}
+.icons3{
+	vertical-align: bottom;
+	font-size: 21px!important;
+	color: #4d4d4d;
+}
+.p3{
+	font-size: 13px;
+	word-spacing: 1px;
+	letter-spacing: 0px;
+	margin-top: 10px;
+}
+.p3 span{
+	color: #7084e9; padding-left: 20px;
+}

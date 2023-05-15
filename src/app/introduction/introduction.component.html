@@ -1,0 +1,113 @@
+<div>
+    <h2>Formulaire de Portfolio</h2>
+    <label for="name">Nom :</label>
+    <input
+      type="text"
+      [(ngModel)]="name"
+      class="form-control"
+      id="name"
+      name="name"
+      required
+    />
+      <label for="job">travail actuel :</label>
+      <input
+        type="text"
+        [(ngModel)]="job"
+        class="form-control"
+        id="job"
+        name="job"
+        required
+      />
+  
+<label for="dob">Date de naissance :</label>
+<input
+  type="date"
+  [(ngModel)]="dob"
+  class="form-control"
+  name="dob"
+  required
+/>
+
+<label for="website">Site web :</label>
+<input
+  type="url"
+  [(ngModel)]="website"
+  class="form-control"
+  name="website"
+/>
+
+<label for="age">Âge :</label>
+<input
+  type="number"
+  [(ngModel)]="age"
+  class="form-control"
+  name="age"
+  required
+/>
+
+<label for="degree">Diplôme :</label>
+<input
+  type="text"
+  [(ngModel)]="degree"
+  class="form-control"
+  name="degree"
+  required
+/>
+
+<label for="freelance">Freelance :</label>
+<select [(ngModel)]="freelance" class="form-control" name="freelance" required id="option">
+  <option value="">-- Sélectionner --</option>
+  <option value="yes">Oui</option>
+  <option value="no">Non</option>
+</select>
+    <label for="Parcours">Parcours :</label>
+    <input
+      type="text"
+      [(ngModel)]="parcours"
+      class="form-control"
+      id="Parcours"
+      name="Parcours"
+      required
+    />
+  
+    <label for="education">education :</label>
+    <textarea
+      id="education"
+      [(ngModel)]="education"
+      class="form-control"
+      name="education"
+      rows="4"
+      required
+    ></textarea>
+  
+    <label for="experience">Expérience :</label>
+    <textarea
+      id="experience"
+      [(ngModel)]="experience"
+      class="form-control"
+      name="experience"
+      rows="4"
+      required
+    ></textarea>
+  
+    <label for="resume">Télécharger CV :</label>
+    <input
+      type="file"
+      [(ngModel)]="resume"
+      class="form-control"
+      name="resume"
+      accept=".pdf,.doc,.docx"
+      required
+    />
+    <label for="photoDeProfil">photo De Profil :</label>
+    <input
+      type="file"
+      id="photoDeProfil"
+      (change)="onFileSelected($event)"
+      class="form-control"
+      name="photoDeProfil"
+      accept="image/*"
+      required
+    />
+  </div>
+  

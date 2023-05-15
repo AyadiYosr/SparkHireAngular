@@ -1,0 +1,37 @@
+
+
+#back {
+    background-image: url('../../assets/background.jpg');
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px;
+    height: 97vh;
+  }
+
+  form {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  button{
+    margin-top: 20px;
+  }
+  
+h1, h2, h3, h4, h5, h6 {
+  color: var(--yt-secondary-text);
+}
+
+a, button {
+background-color: var(--yt-secondary-background);
+color: var(--yt-primary-text);
+border: none;
+padding: 12px 20px;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+button:hover{
+  background-color: var(--yt-primary-background);
+
+}

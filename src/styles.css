@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --yt-primary-background: #181818;
+    --yt-secondary-background: #202020;
+    --yt-primary-text: #FFFFFF;
+    --yt-secondary-text: #AAAAAA;
+    --yt-accent-color: #FF0000;
+  }

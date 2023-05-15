@@ -1,0 +1,759 @@
+<script >
+    /**
+  * Template Name: Laura
+  * Updated: Mar 10 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/laura-free-creative-bootstrap-theme/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  */
+  (function() {
+  "use strict";
+  
+  /**
+   * Easy selector helper function
+   */
+  const select = (el, all = false) => {
+    el = el.trim()
+    if (all) {
+      return [...document.querySelectorAll(el)]
+    } else {
+      return document.querySelector(el)
+    }
+  }
+  
+  /**
+   * Easy event listener function
+   */
+  const on = (type, el, listener, all = false) => {
+    let selectEl = select(el, all)
+    if (selectEl) {
+      if (all) {
+        selectEl.forEach(e => e.addEventListener(type, listener))
+      } else {
+        selectEl.addEventListener(type, listener)
+      }
+    }
+  }
+  
+  /**
+   * Easy on scroll event listener 
+   */
+  const onscroll = (el, listener) => {
+    el.addEventListener('scroll', listener)
+  }
+  
+  /**
+   * Navbar links active state on scroll
+   */
+  let navbarlinks = select('#navbar .scrollto', true)
+  const navbarlinksActive = () => {
+    let position = window.scrollY + 200
+    navbarlinks.forEach(navbarlink => {
+      if (!navbarlink.hash) return
+      let section = select(navbarlink.hash)
+      if (!section) return
+      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
+        navbarlink.classList.add('active')
+      } else {
+        navbarlink.classList.remove('active')
+      }
+    })
+  }
+  window.addEventListener('load', navbarlinksActive)
+  onscroll(document, navbarlinksActive)
+  
+  /**
+   * Scrolls to an element with header offset
+   */
+  const scrollto = (el) => {
+    let header = select('#header')
+    let offset = header.offsetHeight
+  
+    if (!header.classList.contains('header-scrolled')) {
+      offset -= 20
+    }
+  
+    let elementPos = select(el).offsetTop
+    window.scrollTo({
+      top: elementPos - offset,
+      behavior: 'smooth'
+    })
+  }
+  
+  /**
+   * Toggle .header-scrolled class to #header when page is scrolled
+   */
+  let selectHeader = select('#header')
+  if (selectHeader) {
+    const headerScrolled = () => {
+      if (window.scrollY > 100) {
+        selectHeader.classList.add('header-scrolled')
+      } else {
+        selectHeader.classList.remove('header-scrolled')
+      }
+    }
+    window.addEventListener('load', headerScrolled)
+    onscroll(document, headerScrolled)
+  }
+  
+  /**
+   * Back to top button
+   */
+  let backtotop = select('.back-to-top')
+  if (backtotop) {
+    const toggleBacktotop = () => {
+      if (window.scrollY > 100) {
+        backtotop.classList.add('active')
+      } else {
+        backtotop.classList.remove('active')
+      }
+    }
+    window.addEventListener('load', toggleBacktotop)
+    onscroll(document, toggleBacktotop)
+  }
+  
+  /**
+   * Mobile nav toggle
+   */
+  on('click', '.mobile-nav-toggle', function(e) {
+    select('#navbar').classList.toggle('navbar-mobile')
+    this.classList.toggle('bi-list')
+    this.classList.toggle('bi-x')
+  })
+  
+  /**
+   * Mobile nav dropdowns activate
+   */
+  on('click', '.navbar .dropdown > a', function(e) {
+    if (select('#navbar').classList.contains('navbar-mobile')) {
+      e.preventDefault()
+      this.nextElementSibling.classList.toggle('dropdown-active')
+    }
+  }, true)
+  
+  /**
+   * Scrool with ofset on links with a class name .scrollto
+   */
+  on('click', '.scrollto', function(e) {
+    if (select(this.hash)) {
+      e.preventDefault()
+  
+      let navbar = select('#navbar')
+      if (navbar.classList.contains('navbar-mobile')) {
+        navbar.classList.remove('navbar-mobile')
+        let navbarToggle = select('.mobile-nav-toggle')
+        navbarToggle.classList.toggle('bi-list')
+        navbarToggle.classList.toggle('bi-x')
+      }
+      scrollto(this.hash)
+    }
+  }, true)
+  
+  /**
+   * Scroll with ofset on page load with hash links in the url
+   */
+  window.addEventListener('load', () => {
+    if (window.location.hash) {
+      if (select(window.location.hash)) {
+        scrollto(window.location.hash)
+      }
+    }
+  });
+  
+  /**
+   * Skills animation
+   */
+  let skilsContent = select('.skills-content');
+  if (skilsContent) {
+    new Waypoint({
+      element: skilsContent,
+      offset: '80%',
+      handler: function(direction) {
+        let progress = select('.progress .progress-bar', true);
+        progress.forEach((el) => {
+          el.style.width = el.getAttribute('aria-valuenow') + '%'
+        });
+      }
+    })
+  }
+  
+  /**
+   * Testimonials slider
+   */
+  new Swiper('.testimonials-slider', {
+    speed: 600,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+    slidesPerView: 'auto',
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
+    }
+  });
+  
+  /**
+   * Porfolio isotope and filter
+   */
+  window.addEventListener('load', () => {
+    let portfolioContainer = select('.portfolio-container');
+    if (portfolioContainer) {
+      let portfolioIsotope = new Isotope(portfolioContainer, {
+        itemSelector: '.portfolio-item'
+      });
+  
+      let portfolioFilters = select('#portfolio-flters li', true);
+  
+      on('click', '#portfolio-flters li', function(e) {
+        e.preventDefault();
+        portfolioFilters.forEach(function(el) {
+          el.classList.remove('filter-active');
+        });
+        this.classList.add('filter-active');
+  
+        portfolioIsotope.arrange({
+          filter: this.getAttribute('data-filter')
+        });
+  
+      }, true);
+    }
+  
+  });
+  
+  /**
+   * Initiate portfolio lightbox 
+   */
+  const portfolioLightbox = GLightbox({
+    selector: '.portfolio-lightbox'
+  });
+  
+  /**
+   * Portfolio details slider
+   */
+  new Swiper('.portfolio-details-slider', {
+    speed: 400,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
+    }
+  });
+  
+  /**
+   * Initiate Pure Counter 
+   */
+  new PureCounter();
+  
+  })()
+  </script>
+  
+  <!-- ======= Hero Section ======= -->
+    <section id="hero" 
+    [style.background-image]="'url(' + photoUrl + ')'">
+      <div class="hero-container">
+        <h1>{{ formData.name }}</h1>
+        <h2> je suis {{ formData.job }}</h2>
+        <a href="#about" class="btn-scroll scrollto" title="Scroll Down"><i class="bx bx-chevron-down"></i></a>
+      </div>
+    </section><!-- End Hero -->
+  
+    <main id="main">
+  
+      <!-- ======= About Me Section ======= -->
+      <section id="about" class="about">
+        <div class="container">
+  
+          <div class="section-title">
+            <span>About Me</span>
+            <h2>About Me</h2>
+            <p>  {{ formData.education }}</p>
+          </div>
+  
+          <div class="row">
+            <div class="col-lg-4 d-flex align-items-stretch justify-content-center justify-content-lg-start"> <img
+              src="{{formData.photoDeProfil}}"
+              class="img-fluid"
+              alt=""
+            /></div>
+            <div class="col-lg-8 d-flex flex-column align-items-stretch">
+              <div class="content ps-lg-4 d-flex flex-column justify-content-center">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <ul>
+                      <li><i class="bi bi-chevron-right"></i> <strong>Name:</strong> <span>{{ formData.name }}</span></li>
+                      <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>{{ formData.website }}</span></li>
+                      <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>{{ formData.phone }}</span></li>
+                      <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>{{ formData.address }}</span></li>
+                    </ul>
+                  </div>
+                  <div class="col-lg-6">
+                    <ul>
+                      <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>{{ formData.age }}</span></li>
+                      <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>{{ formData.degree }}</span></li>
+                      <li><i class="bi bi-chevron-right"></i> <strong>PhEmailone:</strong> <span>{{ formData.email }}</span></li>
+                      <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong>  <span *ngIf="formData.freelance === 'oui'">Available</span>
+                        <span *ngIf="formData.freelance !== 'oui'"
+                          >Not Available</span
+                        ></li>
+                    </ul>
+                  </div>
+                </div>
+                <p>
+                  {{ formData.experience }}
+                </p>
+              </div><!-- End .content-->
+  
+              <div class="skills-content ps-lg-4">
+                <div *ngFor="let skill of formData.technicalSkills | keyvalue">
+                  <div class="progress">
+                    <span class="skill"
+                      >{{ skill.key }} <i class="val">{{ skill.value }}%</i></span
+                    >
+                    <div class="progress-bar-wrap">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        [style.width.%]="skill.value"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+    
+                <div *ngFor="let skill of formData.softSkills | keyvalue">
+                  <div class="progress">
+                    <span class="skill"
+                      >{{ skill.key }} <i class="val">{{ skill.value }}%</i></span
+                    >
+                    <div class="progress-bar-wrap">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        [style.width.%]="skill.value"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+  
+        </div>
+      </section><!-- End About Me Section -->
+  
+      <!-- ======= My Resume Section ======= -->
+      <section id="resume" class="resume">
+        <div class="container">
+  
+          <div class="section-title">
+            <span>My Resume</span>
+            <h2>My Resume</h2>
+            <p>{{formData.formData.summary}}</p>
+          </div>
+  
+          <div class="row">
+            <div class="col-lg-6">
+              
+              <h3 class="resume-title">Education</h3>
+              <div class="resume-item">
+                <div *ngFor="let edu of formData.formData.education">
+                  <h4>{{ edu.title }}</h4>
+      
+                  <p><em>{{ edu.address }}</em></p>
+                  
+                    <p>{{ edu.description }}</p>
+                  
+                </div>
+              </div>
+            
+            </div>
+            <div class="col-lg-6">
+              <h3 class="resume-title">Professional Experience</h3>
+              <div class="resume-item">
+                <div *ngFor="let exp of formData.formData.experience">
+                  <h4>{{ exp.title }}</h4>
+                  <p><em>{{ exp.address }}</em></p>
+                  <p>{{ exp.description }}</p>
+                </div>
+              </div>
+           
+            </div>
+          </div>
+  
+        </div>
+      </section><!-- End My Resume Section -->
+  
+      <!-- ======= My Services Section ======= -->
+      <section id="services" class="services">
+        <div class="container">
+  
+          <div class="section-title">
+            <span>My Services</span>
+            <h2>My Services</h2>
+            <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+          </div>
+  
+          <div class="row">
+            <div *ngFor="let project of formData.projects" class="col-lg-4 col-md-6 d-flex align-items-stretch">
+              <div class="card">
+                <img src="{{ project.fileData }}" class="card-img-top" alt="{{ project.title }}">
+                <div class="card-body">
+                  <h5 class="card-title"><a href="{{ project.link }}">{{ project.title }}</a></h5>
+                  <p class="card-text">{{ project.description }}</p>
+                  <p class="card-text"><small class="text-muted">{{ project.type }}</small></p>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+  
+        </div>
+      </section><!-- End My Services Section -->
+  
+      <!-- ======= Testimonials Section ======= -->
+      <section id="testimonials" class="testimonials">
+        <div class="container position-relative">
+  
+          <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+            <div class="swiper-wrapper">
+  
+              <div class="swiper-slide">
+                <div *ngFor="let testimonial of formData.testimonials" class="swiper-slide">
+                  <div class="testimonial-item" data-aos="fade-up">
+                    <p>
+                      <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                      {{ testimonial.text }}
+                      <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                    </p>
+                    <img
+                      [src]="testimonial.file"
+                      class="testimonial-img"
+                      alt=""
+                    />
+                    <h3>{{ testimonial.name }}</h3>
+                    <h4>{{ testimonial.position }}</h4>
+                    <span>{{ testimonial.company }}</span>
+                  </div>
+                </div>
+              </div><!-- End testimonial item -->
+  
+          
+  
+           
+  
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+  
+        </div>
+      </section><!-- End Testimonials Section -->
+  
+      <!-- ======= My Portfolio Section ======= -->
+      <!-- <section id="portfolio" class="portfolio">
+        <div class="container">
+  
+          <div class="section-title">
+            <span>My Portfolio</span>
+            <h2>My Portfolio</h2>
+            <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+          </div>
+  
+          <ul id="portfolio-flters" class="d-flex justify-content-center">
+            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-app">App</li>
+            <li data-filter=".filter-card">Card</li>
+            <li data-filter=".filter-web">Web</li>
+          </ul>
+  
+          <div class="row portfolio-container">
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+              <div class="portfolio-img"><img src="../../assets/img2/portfolio/portfolio-1.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>App 1</h4>
+                <p>App</p>
+                <a href="../../assets/img2/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+              <div class="portfolio-img"><img src="../../assets/img2/portfolio/portfolio-2.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Web 3</h4>
+                <p>Web</p>
+                <a href="../../assets/img2/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+              <div class="portfolio-img"><img src="../../assets/img2/portfolio/portfolio-3.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>App 2</h4>
+                <p>App</p>
+                <a href="../../assets/img2/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+              <div class="portfolio-img"><img src="../../assets/img2/portfolio/portfolio-4.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Card 2</h4>
+                <p>Card</p>
+                <a href="../../assets/img2/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+              <div class="portfolio-img"><img src="../../assets/img2/portfolio/portfolio-5.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Web 2</h4>
+                <p>Web</p>
+                <a href="../../assets/img2/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+              <div class="portfolio-img"><img src="../../assets/img2/portfolio/portfolio-6.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>App 3</h4>
+                <p>App</p>
+                <a href="../../assets/img2/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+              <div class="portfolio-img"><img src="../../assets/img2/portfolio/portfolio-7.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Card 1</h4>
+                <p>Card</p>
+                <a href="../../assets/img2/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 1"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+              <div class="portfolio-img"><img src="../../assets/img2/portfolio/portfolio-8.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Card 3</h4>
+                <p>Card</p>
+                <a href="../../assets/img2/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 3"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+              <div class="portfolio-img"><img src="../../assets/img2/portfolio/portfolio-9.jpg" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>Web 3</h4>
+                <p>Web</p>
+                <a href="../../assets/img2/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+                <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+  
+          </div>
+  
+        </div>
+      </section> -->
+      <!-- End My Portfolio Section -->
+  
+      <!-- ======= Pricing Section ======= -->
+      <!-- <section id="pricing" class="pricing">
+        <div class="container">
+  
+          <div class="section-title">
+            <span>Pricing</span>
+            <h2>Pricing</h2>
+            <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+          </div>
+  
+          <div class="row">
+  
+            <div class="col-lg-3 col-md-6">
+              <div class="box">
+                <h3>Free</h3>
+                <h4><sup>$</sup>0<span> / month</span></h4>
+                <ul>
+                  <li>Aida dere</li>
+                  <li>Nec feugiat nisl</li>
+                  <li>Nulla at volutpat dola</li>
+                  <li class="na">Pharetra massa</li>
+                  <li class="na">Massa ultricies mi</li>
+                </ul>
+                <div class="btn-wrap">
+                  <a href="#" class="btn-buy">Buy Now</a>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
+              <div class="box featured">
+                <h3>Business</h3>
+                <h4><sup>$</sup>19<span> / month</span></h4>
+                <ul>
+                  <li>Aida dere</li>
+                  <li>Nec feugiat nisl</li>
+                  <li>Nulla at volutpat dola</li>
+                  <li>Pharetra massa</li>
+                  <li class="na">Massa ultricies mi</li>
+                </ul>
+                <div class="btn-wrap">
+                  <a href="#" class="btn-buy">Buy Now</a>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
+              <div class="box">
+                <h3>Developer</h3>
+                <h4><sup>$</sup>29<span> / month</span></h4>
+                <ul>
+                  <li>Aida dere</li>
+                  <li>Nec feugiat nisl</li>
+                  <li>Nulla at volutpat dola</li>
+                  <li>Pharetra massa</li>
+                  <li>Massa ultricies mi</li>
+                </ul>
+                <div class="btn-wrap">
+                  <a href="#" class="btn-buy">Buy Now</a>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
+              <div class="box">
+                <span class="advanced">Advanced</span>
+                <h3>Ultimate</h3>
+                <h4><sup>$</sup>49<span> / month</span></h4>
+                <ul>
+                  <li>Aida dere</li>
+                  <li>Nec feugiat nisl</li>
+                  <li>Nulla at volutpat dola</li>
+                  <li>Pharetra massa</li>
+                  <li>Massa ultricies mi</li>
+                </ul>
+                <div class="btn-wrap">
+                  <a href="#" class="btn-buy">Buy Now</a>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+  
+        </div>
+      </section> -->
+      <!-- End Pricing Section -->
+  
+      <!-- ======= Contact Me Section ======= -->
+      <section id="contact" class="contact">
+        <div class="container">
+  
+          <div class="section-title">
+            <span>Contact Me</span>
+            <h2>Contact Me</h2>
+            <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+          </div>
+  
+          <div class="row">
+  
+            <div class="col-lg-6">
+  
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="info-box">
+                    <i class="bx bx-share-alt"></i>
+                    <h3>Social Profiles</h3>
+                    <div class="social-links">
+                      <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                      <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                      <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                      <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
+                      <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box mt-4">
+                    <i class="bx bx-envelope"></i>
+                    <h3>Email Me</h3>
+                    <p>contact@example.com</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box mt-4">
+                    <i class="bx bx-phone-call"></i>
+                    <h3>Call Me</h3>
+                    <p>+1 5589 55488 55</p>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+  
+            <div class="col-lg-6">
+              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                </div>
+                <div class="form-group mt-3">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                </div>
+                <div class="my-3">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                </div>
+                <div class="text-center"><button type="submit">Send Message</button></div>
+              </form>
+            </div>
+  
+          </div>
+  
+        </div>
+      </section><!-- End Contact Me Section -->
+  
+    </main><!-- End #main -->
+  
+    <!-- ======= Footer ======= -->
+    
+    <!-- End Footer -->
+  
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  
+    <!-- Vendor JS Files -->
+    <script src="../../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../../assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="../../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../../assets/js/main2.js"></script>
+    <!-- Template Main JS File -->
+  
